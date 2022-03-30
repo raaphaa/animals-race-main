@@ -1,18 +1,19 @@
-class Race(val animals : List<Animal>) {
+class Race(val animals : List<Animal>, val laps : Int) {
 /* A cada volta dos animais somar e dividir pela quantidade de voltas dadas e ver qual animal teve a melhor média */
 
     fun start(){
         race()
         winner()
     }
-     fun race(){
-         for (laps in 1 .. 5){
 
-             println("\n Lap # $laps! \n ")
+     fun race(){
+         for (lap in 1 ..laps){
+
+             println("\n Lap # $lap! \n ")
              animals.forEach { it.run() }
 
              var fasterAnimalOfLap = 2147483647
-             var animalName : String = "Ant"
+             var animalName = "Ant"
 
              for(animal in animals){
 
@@ -24,18 +25,18 @@ class Race(val animals : List<Animal>) {
 
                  }
              }
-             println("\n Faster on lap is: ${animalName.toString()} with speed of: $fasterAnimalOfLap")
+             println("\n Faster on lap is: $animalName with speed of: $fasterAnimalOfLap")
          }
     }
 
     fun winner(){
-        var average = 0
+        var average : Int
         var winnerOfAll = 0
-        var animalName : String = "Ant"
+        var animalName = "Ant"
 
         for(animal in animals){
 
-            average = animal.sumOfSpeeds/5
+            average = animal.sumOfSpeeds / laps
 
             if(average > winnerOfAll ) {
                 winnerOfAll = average
