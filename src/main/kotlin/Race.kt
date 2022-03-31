@@ -9,20 +9,19 @@ class Race(val animals : List<Animal>, val laps : Int) {
      fun race(){
          for (lap in 1 ..laps){
 
-             println("\n Lap # $lap! \n ")
-             animals.forEach { it.run() }
+             println("\n Lap #$lap! \n ")
 
-             var fasterAnimalOfLap = 2147483647
-             var animalName = "Ant"
+             var fasterAnimalOfLap = Int.MAX_VALUE
+             var animalName : String? = null
 
-             for(animal in animals){
+             animals.forEach {
+                 it.run()
 
-                 animal.sumOfSpeeds += animal.velocity
+                 it.sumOfSpeeds += it.velocity
 
-                 if(animal.velocity < fasterAnimalOfLap ) {
-                     fasterAnimalOfLap = animal.velocity
-                     animalName = animal.toString()
-
+                 if(it.velocity < fasterAnimalOfLap ) {
+                     fasterAnimalOfLap = it.velocity
+                     animalName = it.toString()
                  }
              }
              println("\n Faster on lap is: $animalName with speed of: $fasterAnimalOfLap")
@@ -31,14 +30,14 @@ class Race(val animals : List<Animal>, val laps : Int) {
 
     fun winner(){
         var average : Int
-        var winnerOfAll = 0
+        var winnerOfAll = Int.MAX_VALUE
         var animalName = "Ant"
 
         for(animal in animals){
 
             average = animal.sumOfSpeeds / laps
 
-            if(average > winnerOfAll ) {
+            if(average < winnerOfAll ) {
                 winnerOfAll = average
                 animalName = animal.toString()
             }
